@@ -25,15 +25,28 @@ onUnmounted(() => {
 </script>
 
 <template> 
-<div class="w-full h-15 text-white bg-gradient-to-b from-[#181528] to-[#181528]"
+<div class="w-full h-16 bg-gradient-to-b from-[#181528] to-[#181528]"
     :class="{
-            'text-white/40': !focused
+            'text-white/40': !focused,
+            'text-white/80': focused
         }">
-    <div class="h-7 flex flex-row justify-between items-center">
+    <div class="h-8 flex flex-row justify-between items-center text-md">
         <div 
             data-tauri-drag-region
-            class="noselect px-4 text-sm">
+            class="noselect px-4 flex gap-2">
+            <img src="../../../public/tauri.svg" alt="" width="16" height="16">
             Velocity
+        </div>
+        <div class="flex h-full">
+            <div class="px-2 hover:bg-white/20 hover:cursor-pointer h-full grid place-items-center">
+                File
+            </div>
+            <div class="px-2 hover:bg-white/20 hover:cursor-pointer h-full grid place-items-center">
+                Edit
+            </div>
+            <div class="px-2 hover:bg-white/20 hover:cursor-pointer h-full grid place-items-center">
+                View
+            </div>
         </div>
         <div data-tauri-drag-region class="h-full flex-grow"></div>
         <div class="flex flex-row gap-2 px-2">
@@ -55,12 +68,9 @@ onUnmounted(() => {
         </div>
     </div>
     <div data-tauri-drag-region 
-        class="w-full h-8 flex justify-between items-center"
-        :class="{
-                'text-white/40': !focused
-            }">
+        class="w-full h-8 flex justify-between items-center">
         <div class="w-full flex flex-row h-full items-center">
-            <div class="w-full h-full grid grid-flow-col px-1">
+            <div class="w-full h-full grid grid-flow-col grow overflow-hidden">
                 <TheTitleBarTab text="hello" :active="true" />
                 <TheTitleBarTab text="hello" :active="false" />
                 <TheTitleBarTab text="hello" :active="false" />
@@ -69,7 +79,10 @@ onUnmounted(() => {
                 <TheTitleBarTab text="hello" :active="false" />
                 <TheTitleBarTab text="hello" :active="false" />
             </div>
-            <div data-tauri-drag-region class="h-full flex-grow" ></div>
+            <!-- <div data-tauri-drag-region class="h-full flex-grow" ></div> -->
+            <div class="h-full w-24 bg-slate-600">
+
+            </div>
         </div>
     </div>
 </div>

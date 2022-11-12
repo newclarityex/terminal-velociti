@@ -4,7 +4,7 @@
     "beforeBuildCommand": "yarn build",
     "devPath": "http://localhost:1420",
     "distDir": "../dist",
-    "withGlobalTauri": false
+    "withGlobalTauri": true
   },
   "package": {
     "productName": "terminal-velocity",
@@ -29,7 +29,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.velocity.dev",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -57,9 +57,11 @@
       {
         "fullscreen": false,
         "height": 600,
+        "width": 800,
+        "minHeight": 300,
+        "minWidth": 400,
         "resizable": true,
         "title": "Velocity",
-        "width": 800,
         "decorations": false,
         "transparent": true
       }
