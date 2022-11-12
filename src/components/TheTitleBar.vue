@@ -60,7 +60,7 @@ onUnmounted(() => {
                 'text-white/40': !focused
             }">
         <div class="w-full flex flex-row h-full items-center">
-            <div class="w-full h-full grid grid-flow-col">
+            <div class="w-full h-full grid grid-flow-col px-1">
                 <TheTitleBarTab text="hello" :active="true" />
                 <TheTitleBarTab text="hello" :active="false" />
                 <TheTitleBarTab text="hello" :active="false" />

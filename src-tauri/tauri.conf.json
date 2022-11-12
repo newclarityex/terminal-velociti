@@ -7,7 +7,7 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "terminal-velociti",
+    "productName": "terminal-velocity",
     "version": "0.0.0"
   },
   "tauri": {
@@ -58,7 +58,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "Velociti",
+        "title": "Velocity",
         "width": 800,
         "decorations": false,
         "transparent": true

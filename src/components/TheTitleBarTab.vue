@@ -6,9 +6,9 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div class="flex items-center justify-between h-8 px-4"
+    <div class="flex items-center justify-between h-8 px-4 mx-1 rounded-t-md"
         :class="{
-            'bg-slate-600/80 text-white/40': !props.active,
+            'bg-black/30 text-white/50': !props.active,
             'bg-slate-800 text-white': props.active
         }">
         <div>
