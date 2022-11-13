@@ -12,7 +12,19 @@
   },
   "tauri": {
     "allowlist": {
-      "all": true
+      "fs": {
+        "createDir": true,
+        "readDir": true,
+        "writeFile": true,
+        "readFile": true,
+        "scope": ["**"]
+      },
+      "path": {
+        "all": true
+      },
+      "window": {
+        "all": true
+      }
     },
     "bundle": {
       "active": true,
@@ -63,7 +75,8 @@
         "resizable": true,
         "title": "Velocity",
         "decorations": false,
-        "transparent": true
+        "transparent": true,
+        "focus": true
       }
     ]
   }

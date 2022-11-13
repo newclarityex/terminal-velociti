@@ -1,40 +1,31 @@
 <script lang="ts" setup>
 import TheTitleBarTab from "./TheTitleBarTab.vue";
 import { appWindow } from '@tauri-apps/api/window';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { useWindowFocus, useWindowMaximized } from "../hooks/AppWindow";
+import { useSettings } from "../hooks/Settings";
+import { onMounted } from "@vue/runtime-core";
 
-const maximized = ref(false);
-const focused = ref(true);
-const unlistenResize = ref(null as any);
-const unlistenFocus = ref(null as any);
-
-onMounted(async () => {
-    maximized.value = await appWindow.isMaximized();
-    unlistenResize.value = await appWindow.onResized(async () => {
-        maximized.value = await appWindow.isMaximized();
-    });
-    unlistenFocus.value = await appWindow.onFocusChanged(({ payload: focus }) => {
-        focused.value = focus;
-    });
-}); 
-
-onUnmounted(() => {
-    unlistenResize.value();
-    unlistenFocus.value();
-});
+const focused = useWindowFocus();
+const maximized = useWindowMaximized();
+const { settings } = useSettings();
 </script>
 
 <template> 
-<div class="w-full h-16 bg-gradient-to-b from-[#181528] to-[#181528]"
+<div class="w-full h-16 noselect" :style="{
+    backgroundColor: 
+    settings?.appearance?.themes[settings.appearance?.currentTheme]
+            .colors
+            .primary
+}"
     :class="{
             'text-white/40': !focused,
             'text-white/80': focused
         }">
-    <div class="h-8 flex flex-row justify-between items-center text-md">
+    <div class="h-8 flex flex-row justify-between items-center text-sm">
         <div 
             data-tauri-drag-region
-            class="noselect px-4 flex gap-2">
-            <img src="../../../public/tauri.svg" alt="" width="16" height="16">
+            class="px-4 flex gap-2">
+            <img src="../assets/tauri.svg" alt="" width="16" height="16">
             Velocity
         </div>
         <div class="flex h-full">
