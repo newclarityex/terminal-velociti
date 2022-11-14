@@ -1,5 +1,5 @@
-import { onMounted, onUnmounted, ref } from 'vue';
-import { SettingsManager, getAll } from 'tauri-settings';
+import { ref } from 'vue';
+import { SettingsManager } from 'tauri-settings';
 import RobotoMono from '../assets/fonts/RobotoMono-Regular.ttf';
 
 interface Theme {
@@ -25,11 +25,10 @@ interface Schema {
     }
 }
 
-export function useSettings() {
+export default function useSettings() {
     const settingsManager = ref<SettingsManager<Schema> | null>(null);
-    const settings = ref<null | Schema>(null);
 
-    onMounted(async () => {
+    async function initialize() {
         settingsManager.value = new SettingsManager<Schema>(
             {
                 appearance: {
@@ -56,35 +55,11 @@ export function useSettings() {
         )
 
         await settingsManager.value.initialize();
-        const initial = (await getAll<Schema>(settingsManager.value)).settings;
-
-        settings.value = new Proxy(initial, {
-            get(target, name: keyof Schema, reciever) {
-                if (!settingsManager.value) return;
-
-                if (name in target) {
-                    target[name] = settingsManager.value.getCache(name);
-                }
-
-                return Reflect.get(target, name, reciever);
-            },
-            set<K extends keyof Schema>(target: Schema, name: K, value: Schema[K], reciever: any) {
-                if (!settingsManager.value) return false;
-
-                if (name in target) {
-                    settingsManager.value.setCache(name, value);
-                    settingsManager.value.syncCache();
-                    target[name] = value;
-                }
-                Reflect.set(target, name, value, reciever);
-                return true;
-            }
-        });
-    });
-
-
+        console.log("Settings initialized");
+    }
 
     return {
-        settings
+        settingsManager,
+        initialize,
     }
 }

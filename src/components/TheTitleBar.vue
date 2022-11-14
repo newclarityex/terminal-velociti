@@ -1,21 +1,16 @@
 <script lang="ts" setup>
 import TheTitleBarTab from "./TheTitleBarTab.vue";
 import { appWindow } from '@tauri-apps/api/window';
-import { useWindowFocus, useWindowMaximized } from "../hooks/AppWindow";
-import { useSettings } from "../hooks/Settings";
-import { onMounted } from "@vue/runtime-core";
+import useWindow from "../hooks/useWindow";
+import useSettings from "../hooks/useSettings";
 
-const focused = useWindowFocus();
-const maximized = useWindowMaximized();
-const { settings } = useSettings();
+const { isMaximized } = useWindow();
+const { settingsManager } = useSettings();
 </script>
 
 <template> 
 <div class="w-full h-16 noselect" :style="{
-    backgroundColor: 
-    settings?.appearance?.themes[settings.appearance?.currentTheme]
-            .colors
-            .primary
+    backgroundColor: settings?.appearance?.themes[settings.appearance?.currentTheme]?.colors.primary
 }"
     :class="{
             'text-white/40': !focused,
